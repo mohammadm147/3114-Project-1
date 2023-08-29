@@ -1,6 +1,6 @@
 
 // Constructor. poolsize defines the size of the memory pool in bytes
-MemManager(int poolsize);
+public class MemManager(int poolsize);
 
 // Insert a record and return its position handle.
 // space contains the record to be inserted, of length size.
