@@ -6,8 +6,8 @@
 /**
  * The class containing the main method.
  *
- * @author {Your Name Here}
- * @version {Put Something Here}
+ * @author Mohammad Mian, Jae Trimboli
+ * @version 1.0
  */
 
 // On my honor:
