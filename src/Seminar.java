@@ -1,4 +1,5 @@
 import java.io.*;
+Drake needs to drop
 
 /**
  * Seminar class with serialization/deserialization support. You should use this
