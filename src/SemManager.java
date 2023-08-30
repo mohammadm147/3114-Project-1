@@ -39,15 +39,19 @@ public class SemManager {
         Seminar dum = new Seminar();
         int memorySize = Integer.parseInt(args[0]);
         int hashSize = Integer.parseInt(args[1]);
+        
+        if (powerOfTwo(memorySize) == false) {
+            Exception 
+        }
+        
         String fileName = args[2];
         FileReader reader = new FileReader(fileName);
 
     }
 
 
-    private boolean powerOfTwo(int num) {
-        while (num % 2 == 0) 
-        {
+    private static boolean powerOfTwo(int num) {
+        while (num % 2 == 0) {
             num = num / 2;
         }
         if (num == 1) {
