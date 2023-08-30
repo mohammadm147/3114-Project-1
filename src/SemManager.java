@@ -33,17 +33,21 @@ public class SemManager {
     /**
      * @param args
      *            Command line parameters
+     * @throws Exception if memory or hash size is not a power of 2
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // This is the main file for the program.
         Seminar dum = new Seminar();
         int memorySize = Integer.parseInt(args[0]);
         int hashSize = Integer.parseInt(args[1]);
-        
+
         if (powerOfTwo(memorySize) == false) {
-            Exception 
+            throw new Exception("Memory Size Not A Power of 2");
         }
-        
+        if (powerOfTwo(hashSize) == false) {
+            throw new Exception("Hash Size Not A Power of 2");
+        }
+
         String fileName = args[2];
         FileReader reader = new FileReader(fileName);
 
