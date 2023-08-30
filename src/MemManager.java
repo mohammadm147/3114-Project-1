@@ -1,4 +1,3 @@
-
 public class MemManager {
 
     // Constructor. poolsize defines the size of the memory pool in bytes
