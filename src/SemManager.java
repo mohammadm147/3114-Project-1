@@ -33,11 +33,11 @@ public class SemManager {
     /**
      * @param args
      *            Command line parameters
-     * @throws Exception if memory or hash size is not a power of 2
+     * @throws Exception
+     *             if memory or hash size is not a power of 2
      */
     public static void main(String[] args) throws Exception {
         // This is the main file for the program.
-        Seminar dum = new Seminar();
         int memorySize = Integer.parseInt(args[0]);
         int hashSize = Integer.parseInt(args[1]);
 
@@ -54,6 +54,14 @@ public class SemManager {
     }
 
 
+    /**
+     * 
+     * Checks whether or not the memory and hash size is a power of 2
+     * 
+     * @param num
+     *            representing memory or hash size inputed
+     * @return true or false whether the param is a power of two
+     */
     private static boolean powerOfTwo(int num) {
         while (num % 2 == 0) {
             num = num / 2;
