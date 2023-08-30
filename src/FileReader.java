@@ -7,7 +7,8 @@ public class FileReader {
 
 
     public FileReader(String file) {
-        seminars = readFile(file)
+        seminars = readFile(file);
+        SeminarDB database = 
     }
 
 
