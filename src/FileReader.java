@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 public class FileReader {
 
+
     public FileReader(String file) {
-        
+        seminars = readFile(file)
     }
-    
-    
+
+
     private void readFile(String file) {
-        
+
     }
-    
+
 }

@@ -38,5 +38,10 @@ public class SemManager {
     public static void main(String[] args) {
         // This is the main file for the program.
         Seminar dum = new Seminar();
+        int memorySize = Integer.parseInt(args[0]);
+        int hashSize = Integer.parseInt(args[1]);
+        String fileName = args[2];
+        FileReader reader = new FileReader(fileName);
+        
     }
 }
