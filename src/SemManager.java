@@ -48,8 +48,8 @@ public class SemManager {
             throw new Exception("Hash Size Not A Power of 2");
         }
 
-        String fileName = args[2];
-        FileReader reader = new FileReader(fileName);
+        String seminarFile = args[2];
+        FileReader reader = new FileReader(seminarFile);
 
     }
 
