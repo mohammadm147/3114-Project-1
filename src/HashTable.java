@@ -32,8 +32,7 @@ public class HashTable {
         int key = keyFinder(id);
         if (hashTable[key] != null)
         {
-            System.out.print("The");
-
+            System.out.print("Search FAILED -- There is no record with ID " + id);
         }
         System.out.print(hashTable[key]);
     }
