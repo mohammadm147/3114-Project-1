@@ -12,17 +12,15 @@ public class HashTable {
     }
 
 
-    private void insert(int id, Seminar sem) 
-    {
-        if (seminar_count == (hashSize / 2))
-        {
+    private void insert(int id, Seminar sem) {
+        if (seminar_count == (hashSize / 2)) {
             rehash();
         }
-                
+
         int key = keyFinder(id);
-        
+
         hashTable[key] = sem;
-        
+
         seminar_count++;
     }
 
@@ -30,34 +28,37 @@ public class HashTable {
     private void search(int id) {
         // Prints the record with ID value if found
         int key = keyFinder(id);
-        if (hashTable[key] != null)
-        {
-            System.out.print("Search FAILED -- There is no record with ID " + id);
+        if (hashTable[key] != null) {
+            System.out.print("Search FAILED -- There is no record with ID "
+                + id);
         }
         System.out.print(hashTable[key]);
     }
 
 
     private void delete(int id) {
-        // Removes record if in database
-
+        int key = keyFinder(id);
+        if (hashTable[key] != null) {
+            hashTable[key] = null;
+        }
+        seminar_count--;
     }
 
 
     private void rehash() {
+        hashSize = hashSize * 2;
+        Seminar[] updated_hashtable = new Seminar[hashSize];
 
     }
-    
-    private int keyFinder(int id)
-    {
+
+
+    private int keyFinder(int id) {
         int key = (id % hashSize);
 
-        while (hashTable[key] != null)
-        {
+        while (hashTable[key] != null) {
             key = (key + ((id / hashSize) % (hashSize / 2) * 2) + 1);
-            
-            while (key >= hashSize)
-            {
+
+            while (key >= hashSize) {
                 key--;
             }
         }
