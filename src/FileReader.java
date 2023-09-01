@@ -25,6 +25,7 @@ public class FileReader {
         ArrayList<Seminar> seminar_list = new ArrayList<Seminar>();
 
         while (sc.hasNextLine()) {
+<<<<<<< Updated upstream
             String insert_line = sc.nextLine();
             if (insert_line.contains("insert")) {
                 String[] insert = insert_line.split("\\s+");
@@ -47,6 +48,9 @@ public class FileReader {
             }
 
             // Search and Delete commands later
+=======
+            System.out.println(());
+>>>>>>> Stashed changes
         }
         sc.close();
     }
