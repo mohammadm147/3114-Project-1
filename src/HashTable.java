@@ -29,7 +29,13 @@ public class HashTable {
 
     private void search(int id) {
         // Prints the record with ID value if found
-        
+        int key = keyFinder(id);
+        if (hashTable[key] != null)
+        {
+            System.out.print("The");
+
+        }
+        System.out.print(hashTable[key]);
     }
 
 
