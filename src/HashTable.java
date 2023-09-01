@@ -56,5 +56,6 @@ public class HashTable {
                 key--;
             }
         }
+        return key;
     }
 }
