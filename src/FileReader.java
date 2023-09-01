@@ -15,6 +15,10 @@ public class FileReader {
     }
 
 
+    /*
+     * Parses through the input file and storing important information and using
+     * the information to create Seminar objects
+     */
     private void readFile(String fileName)
         throws FileNotFoundException,
         URISyntaxException {
@@ -25,7 +29,9 @@ public class FileReader {
         ArrayList<Seminar> seminar_list = new ArrayList<Seminar>();
 
         while (sc.hasNextLine()) {
-<<<<<<< Updated upstream
+
+            // Deals with only insert functions in which the Seminar object is
+            // created
             String insert_line = sc.nextLine();
             if (insert_line.contains("insert")) {
                 String[] insert = insert_line.split("\\s+");
@@ -48,9 +54,6 @@ public class FileReader {
             }
 
             // Search and Delete commands later
-=======
-            System.out.println(());
->>>>>>> Stashed changes
         }
         sc.close();
     }

@@ -1,10 +1,6 @@
 
 public class HashTable {
 
-<<<<<<< Updated upstream
-    
-    
-=======
     void hashInsert(Handle k, Elem e) {
         int home; // Home position for e
         int pos = home = h(k); // Init probe sequence
@@ -35,5 +31,5 @@ public class HashTable {
         } // K not in hash table
     }
 
->>>>>>> Stashed changes
+
 }
