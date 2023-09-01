@@ -19,17 +19,7 @@ public class HashTable {
             rehash();
         }
                 
-        int key = (id % hashSize);
-
-        while (hashTable[key] != null)
-        {
-            key = (key + ((id / hashSize) % (hashSize / 2) * 2) + 1);
-            
-            while (key >= hashSize)
-            {
-                key--;
-            }
-        }
+        int key = keyFinder(id);
         
         hashTable[key] = sem;
         
@@ -52,5 +42,19 @@ public class HashTable {
     private void rehash() {
 
     }
+    
+    private int keyFinder(int id)
+    {
+        int key = (id % hashSize);
 
+        while (hashTable[key] != null)
+        {
+            key = (key + ((id / hashSize) % (hashSize / 2) * 2) + 1);
+            
+            while (key >= hashSize)
+            {
+                key--;
+            }
+        }
+    }
 }
