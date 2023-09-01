@@ -17,7 +17,7 @@ public class HashTable {
         
         int key2 = ((id / hashSize) % (hashSize / 2) * 2) + 1;
             add to the first key if the first position is filled
-
+        
         seminar_count++;
     }
 

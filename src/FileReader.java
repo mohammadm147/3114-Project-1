@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class FileReader {
 
+    private ArrayList<Seminar> seminars;
+
     public FileReader(String file)
         throws FileNotFoundException,
         URISyntaxException {
@@ -18,14 +20,14 @@ public class FileReader {
      * Parses through the input file and storing important information and using
      * the information to create Seminar objects
      */
-    private void readFile(String fileName)
+    private ArrayList<Seminar> readFile(String fileName)
         throws FileNotFoundException,
         URISyntaxException {
         URL path = ClassLoader.getSystemResource(fileName);
         File newFile = new File(path.toURI());
         Scanner sc = new Scanner(newFile);
 
-        ArrayList<Seminar> seminar_list = new ArrayList<Seminar>();
+        seminars = new ArrayList<Seminar>();
 
         while (sc.hasNextLine()) {
 
@@ -49,12 +51,13 @@ public class FileReader {
                 Seminar sem = new Seminar(id, title, date, length, x_coord,
                     y_coord, cost, keywords, format_des);
                 System.out.println(sem.toString());
-                seminar_list.add(sem);
+                seminars.add(sem);
             }
 
             // Search and Delete commands later
         }
         sc.close();
+        return seminars;
     }
 
 }

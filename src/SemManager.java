@@ -3,6 +3,8 @@
  * {Project Description Here}
  */
 
+import java.util.ArrayList;
+
 /**
  * The class containing the main method.
  *
@@ -50,6 +52,9 @@ public class SemManager {
 
         String seminarFile = args[2];
         FileReader reader = new FileReader(seminarFile);
+        ArrayList<Seminar> seminars = reader.readFile(seminarFile);
+
+        SeminarDB world = new SeminarDB(seminars);
 
     }
 
