@@ -1,35 +1,37 @@
 
 public class HashTable {
 
-    void hashInsert(Handle k, Elem e) {
-        int home; // Home position for e
-        int pos = home = h(k); // Init probe sequence
-        for (int i = 1; EMPTYKEY != (HT[pos]).key(); i++) {
-            if (k == HT[pos].key()) {
-                println("Duplicates not allowed");
-                return;
-            }
-            pos = (home + p(k, i)) % M; // probe
-        }
-        HT[pos] = e;
+    private int hashSize;
+    private int seminar_count;
+
+    public HashTable(int hash_size) {
+        Seminar[] hashtable = new Seminar[hashSize];
+        hashSize = hash_size;
+        seminar_count = 0;
     }
 
 
-    boolean hashSearch(Handle K, Elem e) {
-        int home; // Home position for K
-        int pos = home = h(K); // Initial position is the home slot
-        for (int i = 1; (K != (HT[pos]).key()) && (EMPTYKEY != (HT[pos])
-            .key()); i++) {
-            pos = (home + p(K, i)) % M; // Next on probe sequence
-        }
-        if (K == (HT[pos]).key()) { // Found it
-            e = HT[pos];
-            return true;
-        }
-        else {
-            return false;
-        } // K not in hash table
+    private void insert(int id) {
+        int key1 = (id % hashSize);
+        int key2 = ((id / hashSize) % (hashSize / 2) * 2) + 1;
+
+        seminar_count++;
     }
 
+
+    private void search(int id) {
+        // Prints the record with ID value if found
+    }
+
+
+    private void delete(int id) {
+        // Removes record if in database
+
+    }
+
+
+    private void reHash() {
+
+    }
 
 }
