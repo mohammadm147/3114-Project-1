@@ -33,13 +33,13 @@ public class HashTable {
         
         hashTable[key] = sem;
         
-        
         seminar_count++;
     }
 
 
     private void search(int id) {
         // Prints the record with ID value if found
+        
     }
 
 
