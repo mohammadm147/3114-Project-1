@@ -3,20 +3,36 @@ public class HashTable {
 
     private int hashSize;
     private int seminar_count;
+    private Seminar[] hashTable;
 
     public HashTable(int hash_size) {
-        Seminar[] hashtable = new Seminar[hashSize];
+        hashTable = new Seminar[hashSize];
         hashSize = hash_size;
         seminar_count = 0;
     }
 
 
-    private void insert(int id) {
-        int key1 = (id % hashSize);
-        first key is location for insert
+    private void insert(int id, Seminar sem) 
+    {
+        if (seminar_count == (hashSize / 2))
+        {
+            rehash();
+        }
+                
+        int key = (id % hashSize);
+
+        while (hashTable[key] != null)
+        {
+            key = (key + ((id / hashSize) % (hashSize / 2) * 2) + 1);
+            
+            while (key >= hashSize)
+            {
+                key--;
+            }
+        }
         
-        int key2 = ((id / hashSize) % (hashSize / 2) * 2) + 1;
-            add to the first key if the first position is filled
+        hashTable[key] = sem;
+        
         
         seminar_count++;
     }
@@ -33,7 +49,7 @@ public class HashTable {
     }
 
 
-    private void reHash() {
+    private void rehash() {
 
     }
 

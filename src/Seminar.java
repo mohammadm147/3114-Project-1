@@ -91,7 +91,7 @@ public class Seminar implements Serializable {
 
     // ----------------------------------------------------------
     /**
-     * Return the cannonical serialized form (as a byte array) for this seminar
+     * Return the canonical serialized form (as a byte array) for this seminar
      * object
      *
      * @return the byte array that is the serialization of this
