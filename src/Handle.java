@@ -10,6 +10,14 @@ public class Handle {
         key = keyInput;
     }
     
+    public int getKey()
+    {
+        return key;
+    }
     
+    public int getId()
+    {
+        return id;
+    }
 
 }
