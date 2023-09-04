@@ -17,6 +17,7 @@ public class HashTable {
             rehash();
         }
 
+        handle.setId(id);
         handle.setKey(keyFinder(id));
 
         hashTable[handle.getKey()] = handle;
@@ -40,15 +41,29 @@ public class HashTable {
         int key = (id % hashSize);
         if (hashTable[key] != null) {
             hashTable[key] = null;
+            System.out.print("Record with ID " + id + " successfully deleted from the database");
+            seminar_count--;
         }
-        seminar_count--;
+        else
+        {
+            System.out.print("Delete FAILED -- There is no record with ID " + id);
+        }
     }
 
 
     private void rehash() {
         hashSize = hashSize * 2;
-        Handle[] updated_hashtable = new Handle[hashSize];
-
+        HashTable updatedHashTable = new HashTable(hashSize);
+        
+        for (int i = 0; i < hashTable.length; i++)
+        {
+            if (hashTable[i] != null)
+            {
+                int tempId = hashTable[i].getId();
+                updatedHashTable.insert(tempId, hashTable[i]);
+            }
+        }
+        hashTable = updatedHashTable.getArr();
     }
 
 
@@ -63,5 +78,10 @@ public class HashTable {
             }
         }
         return key;
+    }
+    
+    private Handle[] getArr()
+    {
+        return hashTable;
     }
 }
