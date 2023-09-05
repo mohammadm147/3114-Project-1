@@ -27,7 +27,7 @@ public class SeminarDB {
             if (commands.get(i).command == "insert") {
                 handle = new Handle();
                 int id = Integer.parseInt(commands.get(i).id);
-                if (table.search(id).equals(true)) {
+                if (table.search(id) == (true)) {
                     System.out.println(
                         "Insert FAILED - There is already a record with ID "
                             + id);

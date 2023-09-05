@@ -25,7 +25,7 @@ public class HashTableTest extends TestCase{
         assertEquals(handle.getKey(), 4);
         assertEquals(hashTable.getArr()[4], handle);
         hashTable.insert(id, handle);
-        assertEquals(handle.getKey(), 1);
+        assertEquals(handle.getKey(), 5);
     }
     
     public void testInsertWhenArrayHalfFull()
@@ -52,11 +52,24 @@ public class HashTableTest extends TestCase{
     
     public void testSearch()
     {
-        hashTable.insert(1, handle);
-        assertEquals(handle.getId(), 1);
+        Handle handle2 = new Handle();;
+        for (int i = 0; i < 11; i++)
+        {
+            handle2 = new Handle();
+            hashTable.insert(i, handle2);
+        }
+        
+        assertEquals(handle2.getId(), 10);
+        assertEquals(handle2.getKey(), 10);
+        boolean found = hashTable.search(10);
+        assertTrue(found);
+        found = hashTable.search(20);
+        assertFalse(found);
+        found = hashTable.search(7);
+        assertTrue(found);
+        found = hashTable.search(3);
+        assertTrue(found);
+        hashTable.insert(50, handle2);
+        assertEquals(handle2.getKey(), 13);
     }
-    
-    
-
-
 }

@@ -23,20 +23,26 @@ public class HashTable {
         hashTable[handle.getKey()] = handle;
 
         seminarCount++;
+        System.out.print("Successfully inserted record with ID " + id);
     }
 
 
-    public void search(int id) {
+    public boolean search(int id) {
         // Prints the record with ID value if found
+        boolean found = false;
         int key = (id % hashSize);
         if (hashTable[key] == null) {
             System.out.print("Search FAILED -- There is no record with ID "
                 + id);
+            return found;
         }
-        else if (hashTable[key].getId() != id) {
+        else if (hashTable[key].getId() != id)
+        {
             key = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
         }
         System.out.print(hashTable[key]);
+        found = true;
+        return found;
     }
 
 
@@ -44,13 +50,12 @@ public class HashTable {
         int key = (id % hashSize);
         if (hashTable[key] != null) {
             hashTable[key] = null;
-            System.out.print("Record with ID " + id
-                + " successfully deleted from the database");
+            System.out.print("Record with ID " + id + " successfully deleted from the database");
             seminarCount--;
         }
-        else {
-            System.out.print("Delete FAILED -- There is no record with ID "
-                + id);
+        else
+        {
+            System.out.print("Delete FAILED -- There is no record with ID " + id);
         }
     }
 
@@ -58,9 +63,11 @@ public class HashTable {
     private void rehash() {
         hashSize = hashSize * 2;
         HashTable updatedHashTable = new HashTable(hashSize);
-
-        for (int i = 0; i < hashTable.length; i++) {
-            if (hashTable[i] != null) {
+        
+        for (int i = 0; i < hashTable.length; i++)
+        {
+            if (hashTable[i] != null)
+            {
                 int tempId = hashTable[i].getId();
                 updatedHashTable.insert(tempId, hashTable[i]);
             }
@@ -73,21 +80,21 @@ public class HashTable {
         int key = (id % hashSize);
 
         if (hashTable[key] != null) {
-            key = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
+            key = key + (((id / hashSize) % (hashSize / 2)) * 2) + 1;
             while (key >= hashSize) {
                 key--;
             }
         }
         return key;
     }
-
-
-    public Handle[] getArr() {
+    
+    public Handle[] getArr()
+    {
         return hashTable;
     }
-
-
-    public int getSize() {
+    
+    public int getSize()
+    {
         return hashSize;
     }
 }
