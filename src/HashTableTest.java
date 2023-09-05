@@ -72,6 +72,7 @@ public class HashTableTest extends TestCase{
         handle2 = new Handle();
         hashTable.insert(50, handle2);
         assertEquals(handle2.getKey(), 13);
+        assertEquals(handle2.getId(), 50);
         found = hashTable.search(50);
         assertTrue(found);
         assertEquals(hashTable.getArr()[13], handle2);
