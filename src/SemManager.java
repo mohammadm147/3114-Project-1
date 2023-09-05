@@ -54,10 +54,8 @@ public class SemManager {
         }
 
         String seminarFile = args[2];
-        FileReader reader = new FileReader();
-        ArrayList<Seminar> seminars = reader.readFile(seminarFile);
 
-        SeminarDB world = new SeminarDB(seminars);
+        SeminarDB world = new SeminarDB(memorySize, hashSize, seminarFile);
 
     }
 

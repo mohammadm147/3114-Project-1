@@ -33,8 +33,7 @@ public class HashTable {
             System.out.print("Search FAILED -- There is no record with ID "
                 + id);
         }
-        else if (hashTable[key].getId() != id)
-        {
+        else if (hashTable[key].getId() != id) {
             key = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
         }
         System.out.print(hashTable[key]);
@@ -45,12 +44,13 @@ public class HashTable {
         int key = (id % hashSize);
         if (hashTable[key] != null) {
             hashTable[key] = null;
-            System.out.print("Record with ID " + id + " successfully deleted from the database");
+            System.out.print("Record with ID " + id
+                + " successfully deleted from the database");
             seminarCount--;
         }
-        else
-        {
-            System.out.print("Delete FAILED -- There is no record with ID " + id);
+        else {
+            System.out.print("Delete FAILED -- There is no record with ID "
+                + id);
         }
     }
 
@@ -58,11 +58,9 @@ public class HashTable {
     private void rehash() {
         hashSize = hashSize * 2;
         HashTable updatedHashTable = new HashTable(hashSize);
-        
-        for (int i = 0; i < hashTable.length; i++)
-        {
-            if (hashTable[i] != null)
-            {
+
+        for (int i = 0; i < hashTable.length; i++) {
+            if (hashTable[i] != null) {
                 int tempId = hashTable[i].getId();
                 updatedHashTable.insert(tempId, hashTable[i]);
             }
@@ -82,14 +80,14 @@ public class HashTable {
         }
         return key;
     }
-    
-    public Handle[] getArr()
-    {
+
+
+    public Handle[] getArr() {
         return hashTable;
     }
-    
-    public int getSize()
-    {
+
+
+    public int getSize() {
         return hashSize;
     }
 }

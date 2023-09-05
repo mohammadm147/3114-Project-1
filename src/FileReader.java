@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class FileReader {
 
-    private ArrayList<Seminar> seminars;
+    private ArrayList<Command> commands;
 
     /**
      * General constructor for the FileReader class
@@ -20,6 +20,7 @@ public class FileReader {
      * @throws Exception
      */
     public FileReader() throws Exception {
+        commands = new ArrayList<Command>();
     }
 
 
@@ -32,11 +33,9 @@ public class FileReader {
      * @return a list of seminar objects after parsing the file
      * @throws Exception
      */
-    public ArrayList<Seminar> readFile(String fileName) throws Exception {
+    public ArrayList<Command> readFile(String fileName) throws Exception {
         File f = new File("src/P1Sample_input.txt");
         Scanner sc = new Scanner(f);
-
-        seminars = new ArrayList<Seminar>();
 
         while (sc.hasNextLine()) {
 
@@ -45,6 +44,7 @@ public class FileReader {
             String currentLine = sc.nextLine();
             if (currentLine.contains("insert")) {
                 String[] insertLine = currentLine.split("\\s+");
+                String commandID = insertLine[1];
                 int id = Integer.parseInt(insertLine[1]);
                 String title = sc.nextLine();
                 String date = sc.next();
@@ -59,26 +59,29 @@ public class FileReader {
                 String formatDesc = description.replaceAll("\\s+", " ");
                 Seminar sem = new Seminar(id, title, date, length, xCoord,
                     yCoord, cost, keywords, formatDesc);
-                System.out.println(sem.toString());
-                int size = sem.serialize().length;
-                System.out.println("Size: " + size);
-                seminars.add(sem);
+                Command insert = new Command("insert", commandID, sem);
+                commands.add(insert);
             }
-// else if (currentLine.contains("search")) {
-// String[] searchLine = currentLine.split("\\s+");
-// int id = Integer.parseInt(searchLine[1]);
-// }
-// else if (currentLine.contains("print")) {
-// String[] printLine = currentLine.split("\\s+");
-// String command = printLine[1];
-// }
-// else if (currentLine.contains("delete")) {
-// String[] deleteLine = currentLine.split("\\s+");
-// int id = Integer.parseInt(deleteLine[1]);
-// }
+            else if (currentLine.contains("search")) {
+                String[] searchLine = currentLine.split("\\s+");
+                Command search = new Command("search", searchLine[1]);
+                commands.add(search);
+            }
+            else if (currentLine.contains("print")) {
+                String[] printLine = currentLine.split("\\s+");
+                String print = printLine[1];
+                Command printCommand = new Command("print", print);
+                commands.add(printCommand);
+
+            }
+            else if (currentLine.contains("delete")) {
+                String[] deleteLine = currentLine.split("\\s+");
+                Command delete = new Command("delete", deleteLine[1]);
+                commands.add(delete);
+            }
         }
         sc.close();
-        return seminars;
+        return commands;
     }
 
 }
