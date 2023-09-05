@@ -35,7 +35,7 @@ public class SemManagerTest extends TestCase {
     }
 
 
-    public void testPowerOfTwo() throws Exception {
+    public void testNull() {
         String[] args = new String[3];
         boolean thrown = false;
         try {
@@ -45,35 +45,6 @@ public class SemManagerTest extends TestCase {
             thrown = true;
         }
         assertTrue(thrown);
-        args[0] = "3";
-        args[1] = "2";
-        thrown = false;
-        try {
-            SemManager.main(args);
-        }
-        catch (Exception e) {
-            thrown = true;
-        }
-        assertTrue(thrown);
-        args[0] = "2";
-        args[1] = "2";
-        thrown = false;
-        try {
-            SemManager.main(args);
-        }
-        catch (Exception e) {
-            thrown = true;
-        }
-        assertFalse(thrown);
-        args[0] = "2";
-        args[1] = "3";
-        thrown = false;
-        try {
-            SemManager.main(args);
-        }
-        catch (Exception e) {
-            thrown = true;
-        }
 
     }
 

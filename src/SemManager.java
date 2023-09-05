@@ -52,10 +52,8 @@ public class SemManager {
         if (powerOfTwo(hashSize) == false) {
             throw new Exception("Hash Size Not A Power of 2");
         }
-
         String seminarFile = args[2];
-
-        SeminarDB world = new SeminarDB(memorySize, hashSize, seminarFile);
+        new SeminarDB(memorySize, hashSize, seminarFile);
 
     }
 

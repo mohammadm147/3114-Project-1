@@ -27,18 +27,23 @@ public class SeminarDB {
             if (commands.get(i).command == "insert") {
                 handle = new Handle();
                 int id = Integer.parseInt(commands.get(i).id);
-//                if (table.search(id) == (true)) {
-//                    System.out.println(
-//                        "Insert FAILED - There is already a record with ID "
-//                            + id);
-//                }
-                table.insert(id, handle);
+                if (table.search(id) == (true)) {
+                    System.out.println(
+                        "Insert FAILED - There is already a record with ID "
+                            + id);
+                }
+                else {
+                    table.insert(id, handle);
+                    System.out.println("Sucessfully inserted record with ID "
+                        + id);
+                }
+
                 System.out.println(commands.get(i).seminar.toString());
                 int length = commands.get(i).seminar.serialize().length;
-                System.out.println("Size of: " + length);
+                System.out.println("Size: " + length);
             }
             else if (commands.get(i).command == "search") {
-
+                
             }
             else if (commands.get(i).command == "print") {
 
