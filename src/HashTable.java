@@ -23,7 +23,6 @@ public class HashTable {
         hashTable[handle.getKey()] = handle;
 
         seminarCount++;
-        System.out.println("Successfully inserted record with ID " + id);
     }
 
 
@@ -32,14 +31,11 @@ public class HashTable {
         boolean found = false;
         int key = (id % hashSize);
         if (hashTable[key] == null) {
-            System.out.println("Search FAILED -- There is no record with ID "
-                + id);
             return found;
         }
         else if (hashTable[key].getId() != id) {
             key = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
         }
-        System.out.print(hashTable[key]);
         found = true;
         return found;
     }
