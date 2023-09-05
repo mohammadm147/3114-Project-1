@@ -6,8 +6,8 @@ public class HashTable {
     private Handle[] hashTable;
 
     public HashTable(int hash_size) {
-        hashTable = new Handle[hashSize];
         hashSize = hash_size;
+        hashTable = new Handle[hashSize];
         seminar_count = 0;
     }
 
@@ -70,9 +70,8 @@ public class HashTable {
     private int keyFinder(int id) {
         int key = (id % hashSize);
 
-        while (hashTable[key] != null) {
-            key = (key + ((id / hashSize) % (hashSize / 2) * 2) + 1);
-
+        if (hashTable[key] != null) {
+            key = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
             while (key >= hashSize) {
                 key--;
             }
@@ -80,8 +79,13 @@ public class HashTable {
         return key;
     }
     
-    private Handle[] getArr()
+    public Handle[] getArr()
     {
         return hashTable;
+    }
+    
+    public int getSize()
+    {
+        return hashSize;
     }
 }
