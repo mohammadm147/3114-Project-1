@@ -15,6 +15,7 @@ public class HashTable {
     public void insert(int id, Handle handle) {
         if (seminarCount >= (hashSize / 2)) {
             rehash();
+            System.out.println("Hash table expanded to " + hashSize + " records");
         }
 
         handle.setId(id);
@@ -34,7 +35,7 @@ public class HashTable {
             return found;
         }
         else if (hashTable[key].getId() != id) {
-            key = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
+            key = key + (((id / hashSize) % (hashSize / 2)) * 2) + 1;
         }
         found = true;
         return found;
