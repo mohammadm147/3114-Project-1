@@ -9,12 +9,14 @@ public class MemManager {
     // Insert a record and return its position handle.
     // space contains the record to be inserted, of length size.
     public Handle insert(byte[] space, int size) {
+        return null;
 
     }
 
 
     // Return the length of the record associated with theHandle
     public int length(Handle theHandle) {
+        return 0;
 
     }
 
@@ -30,6 +32,7 @@ public class MemManager {
     // copying it into space.
     // Return the number of bytes actually copied into space.
     public int get(byte[] space, Handle theHandle, int size) {
+        return size;
 
     }
 

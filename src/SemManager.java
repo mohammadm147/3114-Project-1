@@ -40,6 +40,10 @@ public class SemManager {
      */
     public static void main(String[] args) throws Exception {
         // This is the main file for the program.
+        if (args == null)
+        {
+            throw new Exception("Arguments are null.");
+        }
         int memorySize = Integer.parseInt(args[0]);
         int hashSize = Integer.parseInt(args[1]);
 
