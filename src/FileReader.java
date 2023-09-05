@@ -20,7 +20,7 @@ public class FileReader {
      * Parses through the input file and storing important information and using
      * the information to create Seminar objects
      */
-    private ArrayList<Seminar> readFile(String fileName)
+    public ArrayList<Seminar> readFile(String fileName)
         throws FileNotFoundException,
         URISyntaxException {
         URL path = ClassLoader.getSystemResource(fileName);
