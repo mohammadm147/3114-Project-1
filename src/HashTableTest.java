@@ -36,10 +36,27 @@ public class HashTableTest extends TestCase{
             hashTable.insert(tempId, handle);
         }
         assertEquals(handle.getId(), 9);
+        assertEquals(hashTable.getSize(), 20);
         hashTable.insert(10, handle);
         assertEquals(handle.getId(), 10);
         assertEquals(hashTable.getArr()[handle.getKey()], handle);
         assertEquals(hashTable.getSize(), 40);
+        for (int i = 11; i < 20; i++)
+        {
+            int tempId = i;
+            hashTable.insert(tempId, handle);
+        }
+        assertEquals(hashTable.getSize(), 40);
+        assertEquals(handle.getId(), 19);
+    }
+    
+    public void testSearch()
+    {
+        hashTable.insert(2, handle);
+        assertEquals(handle.getId(), 1);
+        Handle temp = hashTable.search(1);
+        assertEquals(handle.getId(), temp.getId());
+        assertEquals(handle.getKey(), temp.getKey());
     }
     
     
