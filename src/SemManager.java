@@ -40,8 +40,7 @@ public class SemManager {
      */
     public static void main(String[] args) throws Exception {
         // This is the main file for the program.
-        if (args == null)
-        {
+        if (args == null) {
             throw new Exception("Arguments are null.");
         }
         int memorySize = Integer.parseInt(args[0]);
@@ -55,7 +54,7 @@ public class SemManager {
         }
 
         String seminarFile = args[2];
-        FileReader reader = new FileReader(seminarFile);
+        FileReader reader = new FileReader();
         ArrayList<Seminar> seminars = reader.readFile(seminarFile);
 
         SeminarDB world = new SeminarDB(seminars);

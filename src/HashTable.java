@@ -2,18 +2,24 @@
 public class HashTable {
 
     private int hashSize;
-    private int seminar_count;
+    private int seminarCount;
     private Handle[] hashTable;
 
+    /**
+     * HashTable constructor initializing hashtable
+     * 
+     * @param hash_size
+     *            represents inputed hashSize
+     */
     public HashTable(int hash_size) {
         hashSize = hash_size;
         hashTable = new Handle[hashSize];
-        seminar_count = 0;
+        seminarCount = 0;
     }
 
 
     public void insert(int id, Handle handle) {
-        if (seminar_count == (hashSize / 2)) {
+        if (seminarCount == (hashSize / 2)) {
             rehash();
         }
 
@@ -22,7 +28,7 @@ public class HashTable {
 
         hashTable[handle.getKey()] = handle;
 
-        seminar_count++;
+        seminarCount++;
     }
 
 
@@ -41,12 +47,13 @@ public class HashTable {
         int key = (id % hashSize);
         if (hashTable[key] != null) {
             hashTable[key] = null;
-            System.out.print("Record with ID " + id + " successfully deleted from the database");
-            seminar_count--;
+            System.out.print("Record with ID " + id
+                + " successfully deleted from the database");
+            seminarCount--;
         }
-        else
-        {
-            System.out.print("Delete FAILED -- There is no record with ID " + id);
+        else {
+            System.out.print("Delete FAILED -- There is no record with ID "
+                + id);
         }
     }
 
@@ -54,11 +61,9 @@ public class HashTable {
     private void rehash() {
         hashSize = hashSize * 2;
         HashTable updatedHashTable = new HashTable(hashSize);
-        
-        for (int i = 0; i < hashTable.length; i++)
-        {
-            if (hashTable[i] != null)
-            {
+
+        for (int i = 0; i < hashTable.length; i++) {
+            if (hashTable[i] != null) {
                 int tempId = hashTable[i].getId();
                 updatedHashTable.insert(tempId, hashTable[i]);
             }
@@ -78,14 +83,14 @@ public class HashTable {
         }
         return key;
     }
-    
-    public Handle[] getArr()
-    {
+
+
+    public Handle[] getArr() {
         return hashTable;
     }
-    
-    public int getSize()
-    {
+
+
+    public int getSize() {
         return hashSize;
     }
 }

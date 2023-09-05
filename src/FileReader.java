@@ -3,6 +3,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class containing the FileReader that parses the input file
+ * 
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 2023-09-05
+ */
 public class FileReader {
 
     private ArrayList<Seminar> seminars;
@@ -10,13 +17,9 @@ public class FileReader {
     /**
      * General constructor for the FileReader class
      * 
-     * @param file
-     *            takes in the name of the input file
-     * @throws Exception 
+     * @throws Exception
      */
-    public FileReader(String file)
-        throws Exception {
-        readFile(file);
+    public FileReader() throws Exception {
     }
 
 
@@ -27,13 +30,11 @@ public class FileReader {
      * @param fileName
      *            takes in the name of the input file
      * @return a list of seminar objects after parsing the file
-     * @throws Exception 
+     * @throws Exception
      */
-    public ArrayList<Seminar> readFile(String fileName)
-        throws Exception {
-        URL path = ClassLoader.getSystemResource(fileName);
-        File newFile = new File(path.toURI());
-        Scanner sc = new Scanner(newFile);
+    public ArrayList<Seminar> readFile(String fileName) throws Exception {
+        File f = new File("src/P1Sample_input.txt");
+        Scanner sc = new Scanner(f);
 
         seminars = new ArrayList<Seminar>();
 
@@ -48,33 +49,33 @@ public class FileReader {
                 String title = sc.nextLine();
                 String date = sc.next();
                 int length = Integer.parseInt(sc.next());
-                short x_coord = (short)Integer.parseInt(sc.next());
-                short y_coord = (short)Integer.parseInt(sc.next());
+                short xCoord = (short)Integer.parseInt(sc.next());
+                short yCoord = (short)Integer.parseInt(sc.next());
                 int cost = Integer.parseInt(sc.next());
                 sc.nextLine();
                 String keywordLine = sc.nextLine();
                 String[] keywords = keywordLine.split("\\s+");
                 String description = sc.nextLine();
-                String format_des = description.replaceAll("\\s+", " ");
-                Seminar sem = new Seminar(id, title, date, length, x_coord,
-                    y_coord, cost, keywords, format_des);
+                String formatDesc = description.replaceAll("\\s+", " ");
+                Seminar sem = new Seminar(id, title, date, length, xCoord,
+                    yCoord, cost, keywords, formatDesc);
                 System.out.println(sem.toString());
                 int size = sem.serialize().length;
                 System.out.println("Size: " + size);
                 seminars.add(sem);
             }
-            else if (currentLine.contains("search")) {
-                String[] search_line = currentLine.split("\\s+");
-                int id = Integer.parseInt(search_line[1]);
-            }
-            else if (currentLine.contains("print")) {
-                String[] print_line = currentLine.split("\\s+");
-                String command = print_line[1];
-            }
-            else if (currentLine.contains("delete")) {
-                String[] delete_line = currentLine.split("\\s+");
-                int id = Integer.parseInt(delete_line[1]);
-            }
+// else if (currentLine.contains("search")) {
+// String[] searchLine = currentLine.split("\\s+");
+// int id = Integer.parseInt(searchLine[1]);
+// }
+// else if (currentLine.contains("print")) {
+// String[] printLine = currentLine.split("\\s+");
+// String command = printLine[1];
+// }
+// else if (currentLine.contains("delete")) {
+// String[] deleteLine = currentLine.split("\\s+");
+// int id = Integer.parseInt(deleteLine[1]);
+// }
         }
         sc.close();
         return seminars;
