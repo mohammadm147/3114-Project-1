@@ -27,11 +27,11 @@ public class SeminarDB {
             if (commands.get(i).command == "insert") {
                 handle = new Handle();
                 int id = Integer.parseInt(commands.get(i).id);
-                if (table.search(id) == (true)) {
-                    System.out.println(
-                        "Insert FAILED - There is already a record with ID "
-                            + id);
-                }
+//                if (table.search(id) == (true)) {
+//                    System.out.println(
+//                        "Insert FAILED - There is already a record with ID "
+//                            + id);
+//                }
                 table.insert(id, handle);
                 System.out.println(commands.get(i).seminar.toString());
                 int length = commands.get(i).seminar.serialize().length;
