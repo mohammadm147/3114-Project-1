@@ -37,7 +37,10 @@ public class HashTable {
         else if (hashTable[key].getId() != id) {
             key = key + (((id / hashSize) % (hashSize / 2)) * 2) + 1;
         }
-        found = true;
+        if (hashTable[key].getId() == id)
+        {
+            found = true;
+        }
         return found;
     }
 

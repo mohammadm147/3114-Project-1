@@ -75,6 +75,6 @@ public class HashTableTest extends TestCase{
         assertEquals(handle2.getId(), 50);
         found = hashTable.search(50);
         assertTrue(found);
-        assertEquals(hashTable.getArr()[13], handle2);
+        assertEquals(hashTable.getArr()[13].getId(), 50);
     }
 }
