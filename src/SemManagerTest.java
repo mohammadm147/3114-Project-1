@@ -36,7 +36,10 @@ public class SemManagerTest extends TestCase {
 
 
     public void testNull() {
-        String[] args = new String[3];
+        String[] args = null;
+        assertNull(args);
+        args = new String[3];
+        assertNotNull(args);
         boolean thrown = false;
         try {
             SemManager.main(args);

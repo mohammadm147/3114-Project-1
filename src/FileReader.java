@@ -12,15 +12,16 @@ import java.util.Scanner;
  */
 public class FileReader {
 
-    private ArrayList<Command> commands;
+    private SeminarDB world;
 
     /**
      * General constructor for the FileReader class
      * 
      * @throws Exception
      */
-    public FileReader() throws Exception {
-        commands = new ArrayList<Command>();
+    public FileReader(int mem, int hash, String file) throws Exception {
+        world = new SeminarDB(mem, hash, file);
+        readFile(file);
     }
 
 
@@ -33,10 +34,9 @@ public class FileReader {
      * @return a list of seminar objects after parsing the file
      * @throws Exception
      */
-    public ArrayList<Command> readFile(String fileName) throws Exception {
-        File f = new File("src/P1Sample_input.txt");
+    public void readFile(String fileName) throws Exception {
+        File f = new File(fileName);
         Scanner sc = new Scanner(f);
-
         while (sc.hasNextLine()) {
 
             // Deals with only insert functions in which the Seminar object is
@@ -44,7 +44,6 @@ public class FileReader {
             String currentLine = sc.nextLine();
             if (currentLine.contains("insert")) {
                 String[] insertLine = currentLine.split("\\s+");
-                String commandID = insertLine[1];
                 int id = Integer.parseInt(insertLine[1]);
                 String title = sc.nextLine();
                 String date = sc.next();
@@ -59,29 +58,28 @@ public class FileReader {
                 String formatDesc = description.replaceAll("\\s+", " ");
                 Seminar sem = new Seminar(id, title, date, length, xCoord,
                     yCoord, cost, keywords, formatDesc);
-                Command insert = new Command("insert", commandID, sem);
-                commands.add(insert);
+                world.insert(sem, id);
             }
             else if (currentLine.contains("search")) {
                 String[] searchLine = currentLine.split("\\s+");
-                Command search = new Command("search", searchLine[1]);
-                commands.add(search);
+                int id = Integer.parseInt(searchLine[1]);
+                world.search(id);
+
             }
             else if (currentLine.contains("print")) {
                 String[] printLine = currentLine.split("\\s+");
                 String print = printLine[1];
-                Command printCommand = new Command("print", print);
-                commands.add(printCommand);
+                world.print(print);
 
             }
             else if (currentLine.contains("delete")) {
                 String[] deleteLine = currentLine.split("\\s+");
-                Command delete = new Command("delete", deleteLine[1]);
-                commands.add(delete);
+                int id = Integer.parseInt(deleteLine[1]);
+                world.delete(id);
+
             }
         }
         sc.close();
-        return commands;
     }
 
 }
