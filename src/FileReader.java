@@ -8,7 +8,7 @@ import java.util.Scanner;
  * 
  * @author Jae Trimboli (jaetrim)
  * @author Mohammad Mian (mohammadm21)
- * @version 2023-09-05
+ * @version 1.0 2023-09-05
  */
 public class FileReader {
 
