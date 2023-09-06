@@ -52,7 +52,7 @@ public class SemManager {
         if (powerOfTwo(hashSize) == false) {
             throw new Exception("Hash Size Not A Power of 2");
         }
-        String seminarFile = "src/" + args[2];
+        String seminarFile = args[2];
         new FileReader(memorySize, hashSize, seminarFile);
 
     }

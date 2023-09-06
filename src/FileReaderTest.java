@@ -16,7 +16,7 @@ public class FileReaderTest extends TestCase {
     public void setUp() throws Exception {
         int mem = 512;
         int hash = 4;
-        String file = "src/P1Sample_input.txt";
+        String file = "P1Sample_input.txt";
         reader = new FileReader(mem, hash, file);
         db = new SeminarDB(mem, hash, file);
     }
@@ -46,7 +46,13 @@ public class FileReaderTest extends TestCase {
             + "Date: 0703301125, Length: 35, X: 0, Y: 0, Cost: 25\r\n"
             + "Description: Learn what kind of    research is done on HPC  and CSE at VT\r\n"
             + "Keywords: HPC, CSE, computer_science\r\n" + "Size: 168\r\n"
-            + "Insert FAILED - There is already a record with ID 2";
+            + "Found record with ID 3:\r\n" + "Hashtable:\r\n" + "1: 1\r\n"
+            + "2: 2\r\n" + "3: 3\r\n" + "5: 10\r\n" + "Total Records: 4\r\n"
+            + "Found record with ID 2:\r\n" + "Hashtable:\r\n" + "1: 1\r\n"
+            + "2: 2\r\n" + "3: 3\r\n" + "5: 10\r\n" + "Total Records: 4\r\n"
+            + "Insert FAILED - There is already a record with ID 2\r\n"
+            + "Hashtable:\r\n" + "1: 1\r\n" + "2: 2\r\n" + "3: 3\r\n"
+            + "5: 10\r\n" + "Total Records: 4";
         assertFuzzyEquals(systemOut().getHistory(), output);
     }
 }

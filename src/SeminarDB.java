@@ -27,16 +27,36 @@ public class SeminarDB {
             int length = sem.serialize().length;
             System.out.println("Size: " + length);
         }
-    
+
     }
 
 
     public void search(int id) {
+        if (table.search(id) == true) {
+            System.out.println("Found record with ID " + id + ":");
+
+        }
+        else {
+            System.out.println("Search FAILED -- There is no record with ID "
+                + id);
+        }
     }
 
 
     public void print(String command) {
+        if (command.equals("hashtable")) {
+            System.out.println("Hashtable:");
+            for (int i = 0; i < table.getSize(); i++) {
+                if (table.getArr()[i] != null) {
+                    System.out.println(table.getArr()[i].getKey() + ": " + table
+                        .getArr()[i].getId());
+                }
+            }
+            System.out.println("Total Records: " + table.getCount());
+        }
+        else if (command == "blocks") {
 
+        }
     }
 
 
