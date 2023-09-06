@@ -91,6 +91,7 @@ public class HashTable {
             }
             Handle temp = new Handle();
             temp.setId(-1);
+            temp.setKey(key);
 ;           hashTable[key] = temp;
             System.out.println("Record with ID " + id
                 + " successfully deleted from the database");

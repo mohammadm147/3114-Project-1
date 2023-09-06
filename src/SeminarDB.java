@@ -48,8 +48,15 @@ public class SeminarDB {
             System.out.println("Hashtable:");
             for (int i = 0; i < table.getSize(); i++) {
                 if (table.getArr()[i] != null) {
-                    System.out.println(table.getArr()[i].getKey() + ": " + table
-                        .getArr()[i].getId());
+                    if (table.getArr()[i].getId() == -1)
+                    {
+                        System.out.println(table.getArr()[i].getKey() + ": TOMBSTONE");
+                    }
+                    else
+                    {
+                        System.out.println(table.getArr()[i].getKey() + ": " + table
+                            .getArr()[i].getId());
+                    }
                 }
             }
             System.out.println("Total Records: " + table.getCount());
