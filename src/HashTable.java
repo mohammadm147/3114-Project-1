@@ -1,57 +1,101 @@
-
+/**
+ * HashTable Class
+ * 
+ * @author mohammadm21
+ * @author jaetrim
+ * @version 1.0
+ */
 public class HashTable {
 
-    private int hashSize;
     private int seminarCount;
+    private int hashSize;
     private Handle[] hashTable;
 
-    public HashTable(int hash_size) {
-        hashSize = hash_size;
+    /**
+     * Initializes the HashTable using an inputed size
+     * 
+     * @param size
+     *      size of table to be made
+     */
+    public HashTable(int size) {
+        hashSize = size;
         hashTable = new Handle[hashSize];
         seminarCount = 0;
     }
 
 
+    /**
+     * Inserts a new record into the hash table
+     * 
+     * @param id
+     *      id of record to be inserted
+     *
+     * @param handle
+     *      handle that associates id to key value
+     */
     public void insert(int id, Handle handle) {
         if (seminarCount >= (hashSize / 2)) {
             rehash();
-            System.out.println("Hash table expanded to " + hashSize + " records");
+            System.out.println("Hash table expanded to " 
+                + hashSize + " records");
         }
-
         handle.setId(id);
-        handle.setKey(keyFinder(id));
-
+        int key = keyFinder1(id);
+        while (hashTable[key] != null)
+        {
+            key = keyFinder2(id, key);
+        }
+        handle.setKey(key);
         hashTable[handle.getKey()] = handle;
-
         seminarCount++;
     }
 
-
+    /**
+     * Searches for a record associated with 
+     * a given id within the hash table 
+     * 
+     * @param id
+     *      id to search for
+     *      
+     * @return boolean
+     *      Returns true is id is found.
+     *      False otherwise
+     */
     public boolean search(int id) {
         // Prints the record with ID value if found
         boolean found = false;
-        int key = (id % hashSize);
+        int key = keyFinder1(id);
         if (hashTable[key] == null) {
             return found;
         }
-        else if (hashTable[key].getId() != id) {
-            key = key + (((id / hashSize) % (hashSize / 2)) * 2) + 1;
+        while (hashTable[key].getId() != id) {
+            key = keyFinder2(id, key);
         }
-        if (hashTable[key].getId() == id)
-        {
-            found = true;
-        }
+        found = true;
         return found;
     }
 
-
+    /**
+     * Deletes a record associated with a 
+     * given id within the hash table
+     * 
+     * @param id
+     *      id to be deleted
+     */
     public void delete(int id) {
-        int key = (id % hashSize);
+        int key = keyFinder1(id);
         if (hashTable[key] != null) {
-            hashTable[key] = null;
-            System.out.println("Record with ID " + id
-                + " successfully deleted from the database");
-            seminarCount--;
+            if (hashTable[key].getId() != id)
+            {
+                key = keyFinder2(id, key);
+            }
+            if (hashTable[key].getId() == id)
+            {
+                hashTable[key] = null;
+                System.out.println("Record with ID " + id
+                    + " successfully deleted from the database");
+                seminarCount--;
+            }
         }
         else {
             System.out.println("Delete FAILED -- There is no record with ID "
@@ -74,25 +118,47 @@ public class HashTable {
     }
 
 
-    private int keyFinder(int id) {
+    private int keyFinder1(int id) 
+    {
         int key = (id % hashSize);
-
-        if (hashTable[key] != null) {
-            key = key + (((id / hashSize) % (hashSize / 2)) * 2) + 1;
-            while (key >= hashSize) {
-                key--;
-            }
-        }
         return key;
     }
+    
+    private int keyFinder2(int id, int key)
+    {
+        int newKey = key + 
+            (((id / hashSize) % (hashSize / 2)) * 2) + 1;
+        return newKey;
+    }
 
-
+    /**
+     * Returns the array within the hash table
+     * 
+     * @return Handle[]
+     *      Returns array of handle objects
+     */
     public Handle[] getArr() {
         return hashTable;
     }
 
-
+    /**
+     * Returns the size of the hash table
+     * 
+     * @return int
+     *      Returns size as an integer
+     */
     public int getSize() {
         return hashSize;
+    }
+    
+    /**
+     * Returns the number of objects in the hash table
+     * 
+     * @return int
+     *      Returns count as an integer
+     */
+    public int getCount()
+    {
+        return seminarCount;
     }
 }
