@@ -81,6 +81,12 @@ public class HashTableTest extends TestCase{
         assertEquals(handle2.getKey(), 22);
         assertEquals(handle2.getId(), 90);
         assertEquals(hashTable.getArr()[22].getId(), 90);
+        found = hashTable.search(50);
+        assertTrue(found);
+        found = hashTable.search(80);
+        assertFalse(found);
+
+        
     }
     
     public void testDelete()
