@@ -15,8 +15,15 @@ public class FileReader {
     private SeminarDB world;
 
     /**
-     * General constructor for the FileReader class
+     * FileReader constructor that creates SeminarDB object and calls to read
+     * the file
      * 
+     * @param mem
+     *            representing memory Size
+     * @param hash
+     *            representing hash Size
+     * @param file
+     *            representing the inputed file that is being parsed
      * @throws Exception
      */
     public FileReader(int mem, int hash, String file) throws Exception {
@@ -26,12 +33,10 @@ public class FileReader {
 
 
     /**
-     * Parses through the input file and storing important information and using
-     * the information to create Seminar objects
+     * Parses through the input file and passing commands into world
      * 
      * @param fileName
      *            takes in the name of the input file
-     * @return a list of seminar objects after parsing the file
      * @throws Exception
      */
     public void readFile(String fileName) throws Exception {

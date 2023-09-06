@@ -1,12 +1,17 @@
 import student.TestCase;
 
 /**
- * @author {Your Name Here}
- * @version {Put Something Here}
+ * 
+ * Creates SemManagerTest to test the Sem Manager
+ * 
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 2023-09-06
+ * 
  */
 public class SemManagerTest extends TestCase {
 
-    SemManager sem;
+    private SemManager sem;
 
     /**
      * Sets up the tests that follow. In general, used for initialization
@@ -35,6 +40,12 @@ public class SemManagerTest extends TestCase {
     }
 
 
+    /**
+     * 
+     * Creates test method to test if memory and has are powers of two
+     * 
+     * @throws Exception
+     */
     public void testPowerOfTwo() throws Exception {
         assertEquals(SemManager.powerOfTwo(2), true);
         assertEquals(SemManager.powerOfTwo(3), false);
