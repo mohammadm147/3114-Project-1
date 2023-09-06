@@ -52,7 +52,7 @@ public class SemManager {
         if (powerOfTwo(hashSize) == false) {
             throw new Exception("Hash Size Not A Power of 2");
         }
-        String seminarFile = "src/"+args[2];
+        String seminarFile = "src/" + args[2];
         new FileReader(memorySize, hashSize, seminarFile);
 
     }
@@ -66,7 +66,7 @@ public class SemManager {
      *            representing memory or hash size inputed
      * @return true or false whether the param is a power of two
      */
-    private static boolean powerOfTwo(int num) {
+    public static boolean powerOfTwo(int num) {
         while (num % 2 == 0) {
             num = num / 2;
         }

@@ -15,23 +15,23 @@ public class SeminarDB {
 
 
     public void insert(Seminar sem, int id) throws Exception {
-        handle = new Handle();
         if (table.search(id) == true) {
             System.out.println(
                 "Insert FAILED - There is already a record with ID " + id);
         }
         else {
+            handle = new Handle();
             table.insert(id, handle);
             System.out.println("Sucessfully inserted record with ID " + id);
+            System.out.println(sem.toString());
+            int length = sem.serialize().length;
+            System.out.println("Size: " + length);
         }
-        System.out.println(sem.toString());
-        int length = sem.serialize().length;
-        System.out.println("Size: " + length);
+    
     }
 
 
     public void search(int id) {
-
     }
 
 

@@ -35,19 +35,9 @@ public class SemManagerTest extends TestCase {
     }
 
 
-    public void testNull() {
-        String[] args = null;
-        assertNull(args);
-        args = new String[3];
-        assertNotNull(args);
-        boolean thrown = false;
-        try {
-            SemManager.main(args);
-        }
-        catch (Exception e) {
-            thrown = true;
-        }
-        assertTrue(thrown);
+    public void testPowerOfTwo() throws Exception {
+        assertEquals(SemManager.powerOfTwo(2), true);
+        assertEquals(SemManager.powerOfTwo(3), false);
 
     }
 
