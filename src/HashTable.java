@@ -41,7 +41,7 @@ public class HashTable {
         }
         handle.setId(id);
         int key = keyFinder1(id);
-        while (hashTable[key] != null)
+        while ((hashTable[key] != null)  && (hashTable[key].getId() != -1))
         {
             key = keyFinder2(id, key);
         }
@@ -89,7 +89,9 @@ public class HashTable {
             {
                 key = keyFinder2(id, key);
             }
-            hashTable[key] = null;
+            Handle temp = new Handle();
+            temp.setId(-1);
+;           hashTable[key] = temp;
             System.out.println("Record with ID " + id
                 + " successfully deleted from the database");
             seminarCount--;

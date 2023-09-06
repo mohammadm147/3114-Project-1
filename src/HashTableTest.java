@@ -108,6 +108,15 @@ public class HashTableTest extends TestCase{
         assertEquals(hashTable.getArr()[13], handle2);
         hashTable.delete(50);
         assertEquals(hashTable.getCount(), 10);
-        assertEquals(hashTable.getArr()[13], null);
+        assertEquals(hashTable.getArr()[13].getId(), -1);
+        handle2 = new Handle();
+        hashTable.insert(50, handle2);
+        assertEquals(hashTable.getArr()[13].getId(), 50);
+    }
+    
+    public void testEmptyTable()
+    {
+        assertEquals(hashTable.search(32), false);
+        hashTable.delete(32);
     }
 }
