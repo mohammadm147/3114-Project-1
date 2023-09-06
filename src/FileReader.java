@@ -42,6 +42,7 @@ public class FileReader {
             // Deals with only insert functions in which the Seminar object is
             // created
             String currentLine = sc.nextLine();
+            currentLine.trim();
             if (currentLine.contains("insert")) {
                 String[] insertLine = currentLine.split("\\s+");
                 int id = Integer.parseInt(insertLine[1]);
@@ -52,10 +53,10 @@ public class FileReader {
                 short yCoord = (short)Integer.parseInt(sc.next());
                 int cost = Integer.parseInt(sc.next());
                 sc.nextLine();
-                String keywordLine = sc.nextLine();
+                String keywordLine = sc.nextLine().trim();
                 String[] keywords = keywordLine.split("\\s+");
                 String description = sc.nextLine();
-                String formatDesc = description.replaceAll("\\s+", " ");
+                String formatDesc = description.trim();
                 Seminar sem = new Seminar(id, title, date, length, xCoord,
                     yCoord, cost, keywords, formatDesc);
                 world.insert(sem, id);
@@ -74,8 +75,14 @@ public class FileReader {
             }
             else if (currentLine.contains("delete")) {
                 String[] deleteLine = currentLine.split("\\s+");
-                int id = Integer.parseInt(deleteLine[1]);
-                world.delete(id);
+                if (deleteLine.length == 3) {
+                    int id = Integer.parseInt(deleteLine[2]);
+                    world.delete(id);
+                }
+                else {
+                    int id = Integer.parseInt(deleteLine[1]);
+                    world.delete(id);
+                }
 
             }
         }
