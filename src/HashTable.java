@@ -108,7 +108,7 @@ public class HashTable {
         HashTable updatedHashTable = new HashTable(hashSize);
 
         for (int i = 0; i < hashTable.length; i++) {
-            if (hashTable[i] != null) {
+            if ((hashTable[i] != null) && (hashTable[i].getId() != -1)) {
                 int tempId = hashTable[i].getId();
                 updatedHashTable.insert(tempId, hashTable[i]);
             }
