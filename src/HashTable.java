@@ -65,7 +65,7 @@ public class HashTable {
         // Prints the record with ID value if found
         boolean found = false;
         int key = keyFinder1(id);
-        while ((key <= hashSize) && (hashTable[key] != null)) {
+        while ((key < hashSize) && (hashTable[key] != null)) {
             if (hashTable[key].getId() == id) {
                 found = true;
             }
@@ -84,6 +84,7 @@ public class HashTable {
      */
     public void delete(int id) {
         int key = keyFinder1(id);
+        
         if (hashTable[key] != null) {
             while (hashTable[key].getId() != id) {
                 key = keyFinder2(id, key);

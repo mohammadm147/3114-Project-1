@@ -48,23 +48,50 @@ public class FileReader {
             // created
             String currentLine = sc.nextLine();
             currentLine.trim();
+
             if (currentLine.contains("insert")) {
                 String[] insertLine = currentLine.split("\\s+");
-                int id = Integer.parseInt(insertLine[1]);
-                String title = sc.nextLine();
-                String date = sc.next();
-                int length = Integer.parseInt(sc.next());
-                short xCoord = (short)Integer.parseInt(sc.next());
-                short yCoord = (short)Integer.parseInt(sc.next());
-                int cost = Integer.parseInt(sc.next());
-                sc.nextLine();
-                String keywordLine = sc.nextLine().trim();
-                String[] keywords = keywordLine.split("\\s+");
-                String description = sc.nextLine();
-                String formatDesc = description.trim();
-                Seminar sem = new Seminar(id, title, date, length, xCoord,
-                    yCoord, cost, keywords, formatDesc);
-                world.insert(sem, id);
+                if (insertLine.length == 2) {
+                    char[] charArray = insertLine[1].toCharArray();
+                    boolean found = false;
+                    for (int i = 0; i < charArray.length; i++) {
+                        if (!Character.isDigit(charArray[i])) {
+                            found = true;
+                        }
+                    }
+                    if (found == false) {
+
+                        int id = Integer.parseInt(insertLine[1]);
+                        String title = sc.nextLine();
+                        String date = sc.next();
+                        int length = Integer.parseInt(sc.next());
+                        short xCoord = Short.parseShort(sc.next());
+                        short yCoord = Short.parseShort(sc.next());
+                        int cost = Integer.parseInt(sc.next());
+                        sc.nextLine();
+                        String keywordLine = sc.nextLine().trim();
+                        String[] keywords = keywordLine.split("\\s+");
+                        String description = sc.nextLine();
+                        String formatDesc = description.trim();
+                        Seminar sem = new Seminar(id, title, date, length,
+                            xCoord, yCoord, cost, keywords, formatDesc);
+                        world.insert(sem, id);
+                    }
+                    else {
+                        sc.nextLine();
+                        sc.nextLine();
+                        sc.nextLine();
+                        sc.nextLine();
+                    }
+
+                }
+                else {
+                    sc.nextLine();
+                    sc.nextLine();
+                    sc.nextLine();
+                    sc.nextLine();
+                }
+
             }
             else if (currentLine.contains("search")) {
                 String[] searchLine = currentLine.split("\\s+");
@@ -91,6 +118,7 @@ public class FileReader {
 
             }
         }
+
         sc.close();
     }
 
