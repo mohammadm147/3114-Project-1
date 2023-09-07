@@ -96,7 +96,7 @@ public class SeminarDB {
                     }
                 }
             }
-            System.out.println("Total Records: " + table.getCount());
+            System.out.println("total records: " + table.getCount());
         }
         else if (command.equals("blocks")) {
 

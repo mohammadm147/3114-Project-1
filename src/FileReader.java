@@ -47,7 +47,7 @@ public class FileReader {
             // Deals with only insert functions in which the Seminar object is
             // created
             String currentLine = sc.nextLine();
-            currentLine.trim();
+            currentLine = currentLine.trim();
 
             if (currentLine.contains("insert")) {
                 String[] insertLine = currentLine.split("\\s+");
