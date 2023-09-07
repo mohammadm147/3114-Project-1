@@ -9,7 +9,7 @@ public class HashTable {
 
     private int seminarCount;
     private int hashSize;
-    private Handle[] hashTable;
+    private Record[] hashTable;
 
     /**
      * Initializes the HashTable using an inputed size
@@ -19,7 +19,7 @@ public class HashTable {
      */
     public HashTable(int size) {
         hashSize = size;
-        hashTable = new Handle[hashSize];
+        hashTable = new Record[hashSize];
         seminarCount = 0;
     }
 
@@ -33,7 +33,7 @@ public class HashTable {
      * @param handle
      *            handle that associates id to key value
      */
-    public void insert(int id, Handle handle) {
+    public void insert(int id, Record handle) {
         if (seminarCount >= (hashSize / 2)) {
             rehash();
             System.out.println("Hash table expanded to " + hashSize
@@ -88,7 +88,7 @@ public class HashTable {
             while (hashTable[key].getId() != id) {
                 key = keyFinder2(id, key);
             }
-            Handle temp = new Handle();
+            Record temp = new Record();
             temp.setId(-1);
             temp.setKey(key);
             hashTable[key] = temp;
@@ -135,7 +135,7 @@ public class HashTable {
      * @return Handle[]
      *         Returns array of handle objects
      */
-    public Handle[] getArr() {
+    public Record[] getArr() {
         return hashTable;
     }
 

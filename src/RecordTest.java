@@ -1,22 +1,22 @@
 import student.TestCase;
 
 /**
- * Tests the handle class
+ * Tests the record class
  * 
  * @author mohammadm21
  * @author jaetrim
  * 
  * @version 1.0 2023-09-05
  */
-public class HandleTest extends TestCase {
+public class RecordTest extends TestCase {
 
-    private Handle handle;
+    private Record record;
 
     /**
      * Sets up the test variables
      */
     public void setUp() {
-        handle = new Handle();
+        record = new Record();
     }
 
 
@@ -24,8 +24,8 @@ public class HandleTest extends TestCase {
      * Tests the key setter and getter
      */
     public void testKey() {
-        handle.setKey(10);
-        assertEquals(handle.getKey(), 10);
+        record.setKey(10);
+        assertEquals(record.getKey(), 10);
     }
 
 
@@ -33,7 +33,7 @@ public class HandleTest extends TestCase {
      * Tests the id setter and getter
      */
     public void testId() {
-        handle.setId(10);
-        assertEquals(handle.getId(), 10);
+        record.setId(10);
+        assertEquals(record.getId(), 10);
     }
 }

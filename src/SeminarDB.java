@@ -11,7 +11,7 @@
 public class SeminarDB {
 
     private HashTable table;
-    private Handle handle;
+    private Record record;
 
     /**
      * SeminarDB Constructor that initializes hashtable and takes in memory,
@@ -31,7 +31,7 @@ public class SeminarDB {
 
 
     /**
-     * Inserts id and handle into hash table and prints info into console
+     * Inserts id and record into hash table and prints info into console
      * 
      * @param sem
      *            represents Seminar object
@@ -45,8 +45,8 @@ public class SeminarDB {
                 "Insert FAILED - There is already a record with ID " + id);
         }
         else {
-            handle = new Handle();
-            table.insert(id, handle);
+            record = new Record();
+            table.insert(id, record);
             System.out.println("Successfully inserted record with ID " + id);
             System.out.println(sem.toString());
             int length = sem.serialize().length;
@@ -108,7 +108,7 @@ public class SeminarDB {
      * Deletes a record at an id
      * 
      * @param id
-     *            reprents id
+     *            represents id
      */
     public void delete(int id) {
         table.delete(id);
