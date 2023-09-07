@@ -13,7 +13,7 @@ public class Handle {
     private int id;
 
     /**
-     * Handle class.  Holds a key/value pair
+     * Handle class. Holds a key/value pair
      */
     public Handle() {
         key = 0;
@@ -24,38 +24,41 @@ public class Handle {
     /**
      * Returns the handle's key
      * 
-     * @return int
-     *      Returns an int representing the key
+     * @return key
+     *         Returns an int representing the key
      */
     public int getKey() {
         return key;
     }
 
+
     /**
      * Returns the handle's id
      * 
-     * @return int
-     *      Returns an int representing the id
+     * @return id
+     *         Returns an int representing the id
      */
     public int getId() {
         return id;
     }
 
+
     /**
      * Sets the handle's key
      * 
-     * @param int
-     *      inputed key
+     * @param key1
+     *            inputed key
      */
     public void setKey(int key1) {
         key = key1;
     }
 
+
     /**
      * Sets the handle's id
      * 
-     * @param int
-     *      inputed id
+     * @param id1
+     *            inputed id
      */
 
     public void setId(int id1) {
