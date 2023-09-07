@@ -84,18 +84,21 @@ public class HashTable {
      */
     public void delete(int id) {
         int key = keyFinder1(id);
-        
-        if (hashTable[key] != null) {
-            while (hashTable[key].getId() != id) {
-                key = keyFinder2(id, key);
+        boolean found = this.search(id);
+
+        if (found == true) {
+            if (hashTable[key] != null) {
+                while (hashTable[key].getId() != id) {
+                    key = keyFinder2(id, key);
+                }
+                Record temp = new Record();
+                temp.setId(-1);
+                temp.setKey(key);
+                hashTable[key] = temp;
+                System.out.println("Record with ID " + id
+                    + " successfully deleted from the database");
+                seminarCount--;
             }
-            Record temp = new Record();
-            temp.setId(-1);
-            temp.setKey(key);
-            hashTable[key] = temp;
-            System.out.println("Record with ID " + id
-                + " successfully deleted from the database");
-            seminarCount--;
         }
         else {
             System.out.println("Delete FAILED -- There is no record with ID "
