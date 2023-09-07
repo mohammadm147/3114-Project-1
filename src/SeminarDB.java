@@ -98,7 +98,7 @@ public class SeminarDB {
             }
             System.out.println("Total Records: " + table.getCount());
         }
-        else if (command == "blocks") {
+        else if (command.equals("blocks")) {
 
         }
     }
@@ -108,6 +108,7 @@ public class SeminarDB {
      * Deletes a record at an id
      * 
      * @param id
+     *            reprents id
      */
     public void delete(int id) {
         table.delete(id);
