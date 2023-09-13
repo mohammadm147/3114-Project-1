@@ -11,6 +11,7 @@ public class Record {
 
     private int key;
     private int id;
+    private Handle han;
 
     /**
      * record class. Holds a key/value pair
@@ -18,6 +19,7 @@ public class Record {
     public Record() {
         key = 0;
         id = 0;
+        han = null;
     }
 
 
@@ -41,6 +43,17 @@ public class Record {
     public int getId() {
         return id;
     }
+    
+    /**
+     * Sets the record's id
+     * 
+     * @return
+     *          seminar
+     */
+    public Handle getHan()
+    {
+        return han;
+    }
 
 
     /**
@@ -60,8 +73,18 @@ public class Record {
      * @param id1
      *            inputed id
      */
-
     public void setId(int id1) {
         id = id1;
+    }
+    
+    /**
+     * Sets the record's seminar
+     * 
+     * @param tempSem
+     *            inputed seminar
+     */
+    public void setHan(Handle tempHan)
+    {
+        han = tempHan;
     }
 }

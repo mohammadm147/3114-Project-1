@@ -11,6 +11,7 @@
 public class SeminarDB {
 
     private HashTable table;
+    private MemManager manager;
     private Record record;
 
     /**
@@ -27,6 +28,7 @@ public class SeminarDB {
      */
     public SeminarDB(int memory, int hash, String fileName) throws Exception {
         table = new HashTable(hash);
+        manager = new MemManager(memory);
     }
 
 
@@ -40,16 +42,27 @@ public class SeminarDB {
      * @throws Exception
      */
     public void insert(Seminar sem, int id) throws Exception {
-        if (table.search(id) == true) {
+        if (table.search(id) != -1) {
             System.out.println(
                 "Insert FAILED - There is already a record with ID " + id);
         }
         else {
             record = new Record();
-            table.insert(id, record);
-            System.out.println("Successfully inserted record with ID " + id);
-            System.out.println(sem.toString());
+
+            // insert mem manager with serialized seminar
+            byte[] semBytes = sem.serialize();
             int length = sem.serialize().length;
+
+            Handle handle = manager.insert(semBytes, semBytes.length);
+
+            record.setHan(handle);
+
+            table.insert(id, record);
+
+            System.out.println("Successfully inserted record with ID " + id);
+
+            System.out.println(sem.toString());
+
             System.out.println("Size: " + length);
         }
 
@@ -61,10 +74,22 @@ public class SeminarDB {
      * 
      * @param id
      *            represents record id
+     * @throws Exception
      */
-    public void search(int id) {
-        if (table.search(id) == true) {
+    public void search(int id) throws Exception {
+        int key = table.search(id);
+        if (key != -1) {
             System.out.println("Found record with ID " + id + ":");
+            int start = table.getArr()[key].getHan().getStart();
+            int end = table.getArr()[key].getHan().getEnd();
+            byte[] tempBytes = new byte[end - start];
+
+            byte[] semBytes = new byte[end - start];
+
+            System.arraycopy(manager.getArr(), start, semBytes, 0,
+                tempBytes.length);
+
+            System.out.println(Seminar.deserialize(semBytes).toString());
 
         }
         else {
@@ -99,8 +124,10 @@ public class SeminarDB {
             System.out.println("total records: " + table.getCount());
         }
         else if (command.equals("blocks")) {
+            System.out.println(manager.dump());
 
         }
+
     }
 
 
@@ -111,6 +138,13 @@ public class SeminarDB {
      *            represents id
      */
     public void delete(int id) {
+
+        int index = table.search(id);
+        if (index != -1) {
+            Handle handle = table.getArr()[index].getHan();
+            manager.remove(handle);
+
+        }
         table.delete(id);
 
     }

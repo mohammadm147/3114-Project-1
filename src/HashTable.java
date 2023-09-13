@@ -30,22 +30,22 @@ public class HashTable {
      * @param id
      *            id of record to be inserted
      *
-     * @param handle
-     *            handle that associates id to key value
+     * @param record
+     *            record that associates id to key value
      */
-    public void insert(int id, Record handle) {
+    public void insert(int id, Record record) {
         if (seminarCount >= (hashSize / 2)) {
             rehash();
             System.out.println("Hash table expanded to " + hashSize
                 + " records");
         }
-        handle.setId(id);
+        record.setId(id);
         int key = keyFinder1(id);
         while ((hashTable[key] != null) && (hashTable[key].getId() != -1)) {
             key = keyFinder2(id, key);
         }
-        handle.setKey(key);
-        hashTable[handle.getKey()] = handle;
+        record.setKey(key);
+        hashTable[record.getKey()] = record;
         seminarCount++;
     }
 
@@ -61,15 +61,18 @@ public class HashTable {
      *         Returns true is id is found.
      *         False otherwise
      */
-    public boolean search(int id) {
+    public int search(int id) {
         // Prints the record with ID value if found
-        boolean found = false;
+        int found = -1;
         int key = keyFinder1(id);
-        while ((key < hashSize) && (hashTable[key] != null)) {
+        while (hashTable[key] != null) {
             if (hashTable[key].getId() == id) {
-                found = true;
+                found = key;
+                return found;
             }
-            key = keyFinder2(id, key);
+            else {
+                key = keyFinder2(id, key);
+            }
         }
         return found;
     }
@@ -83,22 +86,16 @@ public class HashTable {
      *            id to be deleted
      */
     public void delete(int id) {
-        int key = keyFinder1(id);
-        boolean found = this.search(id);
+        int found = this.search(id);
 
-        if (found == true) {
-            if (hashTable[key] != null) {
-                while (hashTable[key].getId() != id) {
-                    key = keyFinder2(id, key);
-                }
-                Record temp = new Record();
-                temp.setId(-1);
-                temp.setKey(key);
-                hashTable[key] = temp;
-                System.out.println("Record with ID " + id
-                    + " successfully deleted from the database");
-                seminarCount--;
-            }
+        if (found != -1) {
+            Record temp = new Record();
+            temp.setId(-1);
+            temp.setKey(found);
+            hashTable[found] = temp;
+            System.out.println("Record with ID " + id
+                + " successfully deleted from the database");
+            seminarCount--;
         }
         else {
             System.out.println("Delete FAILED -- There is no record with ID "
@@ -128,16 +125,18 @@ public class HashTable {
 
 
     private int keyFinder2(int id, int key) {
-        int newKey = key + (((id / hashSize) % (hashSize / 2)) * 2) + 1;
-        return newKey;
+        int step = (((id / hashSize) % (hashSize / 2)) * 2) + 1;
+        key = key + step;
+        key = key % hashSize;
+        return key;
     }
 
 
     /**
      * Returns the array within the hash table
      * 
-     * @return Handle[]
-     *         Returns array of handle objects
+     * @return record[]
+     *         Returns array of record objects
      */
     public Record[] getArr() {
         return hashTable;

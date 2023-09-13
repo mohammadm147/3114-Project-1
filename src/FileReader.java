@@ -62,8 +62,8 @@ public class FileReader {
                     if (found == false) {
 
                         int id = Integer.parseInt(insertLine[1]);
-                        String title = sc.nextLine();
-                        String date = sc.next();
+                        String title = sc.nextLine().trim();
+                        String date = sc.next().trim();
                         int length = Integer.parseInt(sc.next());
                         short xCoord = Short.parseShort(sc.next());
                         short yCoord = Short.parseShort(sc.next());
