@@ -3,7 +3,6 @@
  * {Project Description Here}
  */
 
-import java.util.ArrayList;
 
 /**
  * The class containing the main method.

@@ -62,7 +62,6 @@ public class HashTable {
      *         False otherwise
      */
     public int search(int id) {
-        // Prints the record with ID value if found
         int found = -1;
         int key = keyFinder1(id);
         while (hashTable[key] != null) {

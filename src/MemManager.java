@@ -1,4 +1,4 @@
-import java.nio.ByteBuffer;
+
 
 /**
  * MemManager class
@@ -12,15 +12,12 @@ public class MemManager {
     private int memPoolSize;
     private byte[] memArray;
     private DLList<Block> freeBlocks;
-    private int byteSize = 2;
-    private MemManager mem;
 
     /*
      * MemManager contains Seminars that are serialized
      * MemManager is a byte array containing serialized seminars and freeblocks
      * Handle connects MemManager and HashTable
      * HashTable has records which have id key and Handle
-     * DB is gonna
      */
 
     /**
@@ -87,14 +84,14 @@ public class MemManager {
         System.arraycopy(space, 0, tempArray, freeBlocks.get(bestFit)
             .getStart(), size);
 
+        // gets smallest fitting freeblock based on requested size
         int temp = 2;
         int seminarStart = 0;
         while (temp <= size) {
             temp = temp * 2;
         }
 
-        // for (int j = 0; j < freeBlocks.size(); j++) {
-
+        // splits free blocks
         int count = findFit(temp);
         while ((freeBlocks.get(count).getLength() / 2) >= temp) {
             int half = freeBlocks.get(count).getLength() / 2;
@@ -106,17 +103,16 @@ public class MemManager {
             freeBlocks.add(count, b1);
             freeBlocks.add(count + 1, b2);
         }
-        // }
 
+        // deleting freeblock that will be filled
         int j = findFit(size);
-        if (freeBlocks.get(j).getLength() >= size) {
-            seminarStart = freeBlocks.get(j).getStart();
-            freeBlocks.remove(freeBlocks.get(j));
+        seminarStart = freeBlocks.get(j).getStart();
+        freeBlocks.remove(freeBlocks.get(j));
 
-        }
         // copies back to orignial mem array
         System.arraycopy(tempArray, 0, memArray, 0, tempArray.length);
 
+        // creates handle, merges free blocks, and returns handle
         Handle handle = new Handle();
         handle.setStart(seminarStart);
         handle.setEnd(seminarStart + size);
@@ -150,6 +146,7 @@ public class MemManager {
                 index = i;
             }
         }
+        // if there is no free block found, then resize
         if (startIndex == -1) {
             resize();
             return findFit(size);
@@ -166,15 +163,15 @@ public class MemManager {
         // makes updated array of proper size
         byte[] updatedArray = new byte[newSize];
         System.arraycopy(memArray, 0, updatedArray, 0, memArray.length);
-        // prints to console
 
         Block block = new Block(memArray.length, newSize);
         // new block represnting increase in size
         freeBlocks.add(findIndex(block), block);
 
+        // updated memory array
         memArray = updatedArray;
         memPoolSize = newSize;
-
+        // merge free blocks
         merge(freeBlocks);
 
         System.out.println("Memory pool expanded to " + memArray.length
@@ -274,7 +271,6 @@ public class MemManager {
                     if (length == smallestBlockLength) {
                         res.append(" " + freeBlocks.get(i).getStart());
                     }
-                    // count++;
                 }
                 smallestBlockLength = smallestBlockLength * 2;
             }

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 import student.TestCase;
 
 /**
@@ -10,9 +10,6 @@ import student.TestCase;
  */
 public class FileReaderTest extends TestCase {
 
-    private FileReader reader;
-    private SeminarDB db;
-
     /**
      * Sets up the test variables
      */
@@ -20,8 +17,8 @@ public class FileReaderTest extends TestCase {
         int mem = 64;
         int hash = 4;
         String file = "P1Sample_input.txt";
-        reader = new FileReader(mem, hash, file);
-        db = new SeminarDB(mem, hash, file);
+        new FileReader(mem, hash, file);
+        new SeminarDB(mem, hash, file);
     }
 
 
