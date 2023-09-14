@@ -82,12 +82,11 @@ public class SeminarDB {
             System.out.println("Found record with ID " + id + ":");
             int start = table.getArr()[key].getHan().getStart();
             int end = table.getArr()[key].getHan().getEnd();
-            byte[] tempBytes = new byte[end - start];
 
             byte[] semBytes = new byte[end - start];
 
             System.arraycopy(manager.getArr(), start, semBytes, 0,
-                tempBytes.length);
+                semBytes.length);
 
             System.out.println(Seminar.deserialize(semBytes).toString());
 
@@ -123,7 +122,7 @@ public class SeminarDB {
             }
             System.out.println("total records: " + table.getCount());
         }
-        else if (command.equals("blocks")) {
+        else {
             System.out.println(manager.dump());
 
         }

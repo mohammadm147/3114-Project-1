@@ -14,15 +14,18 @@ public class DLList<T> {
     private Node<T> head;
     private Node<T> tail;
 
+    /**
+     * Constructor to call helper setUp
+     */
     public DLList() {
-        DLListSetUp();
+        reset();
     }
 
 
     /**
      * DLList Constructor Setup
      */
-    private void DLListSetUp() {
+    private void reset() {
         head = new DLList.Node<T>(null);
         tail = new DLList.Node<T>(null);
         head.setNext(tail);
@@ -60,22 +63,7 @@ public class DLList<T> {
      * Removes all elements in list
      */
     public void clear() {
-        DLListSetUp();
-    }
-
-
-    /**
-     * Checks if list has block
-     * 
-     * @param block
-     *            being looked for
-     * @return true if block is in list and false otherwise
-     */
-    public boolean contains(T block) {
-        if (lastIndex(block) != -1) {
-            return true;
-        }
-        return false;
+        reset();
     }
 
 
@@ -93,7 +81,7 @@ public class DLList<T> {
 
 
     /**
-     * Adds in increasing order 
+     * Adds in increasing order
      * 
      * @param block
      *            representing the added block
@@ -112,9 +100,6 @@ public class DLList<T> {
      *            representing block to add
      */
     public void add(int index, T block) {
-        if (index < 0 || size < index) {
-            throw new IndexOutOfBoundsException();
-        }
         if (block == null) {
             throw new IllegalArgumentException(
                 "Can't add null objects to list");
@@ -139,7 +124,7 @@ public class DLList<T> {
     /**
      * Removes block at index
      * 
-     * @param index
+     * @param index param
      * @return true if removed
      */
     public boolean remove(int index) {
@@ -190,25 +175,6 @@ public class DLList<T> {
             curr = curr.next();
         }
         return curr;
-    }
-
-
-    /**
-     * Gets the last index of the block in the list
-     * 
-     * @param block
-     *            that is being searched for
-     * @return last pos of block
-     */
-    public int lastIndex(T block) {
-        Node<T> curr = tail.previous();
-        for (int i = size() - 1; i >= 0; i--) {
-            if (curr.getData().equals(block)) {
-                return i;
-            }
-            curr = curr.previous();
-        }
-        return -1;
     }
 
     /**

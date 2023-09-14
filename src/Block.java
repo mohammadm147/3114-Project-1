@@ -63,18 +63,21 @@ public class Block {
     /**
      * Gets the end index of the block
      * 
-     * @return the end index
+     * @param end
+     *            index
      */
     public void setEnd(int end) {
         this.end = end;
     }
 
+
     /**
      * Gets Length of block
-     * @return
+     * 
+     * @return the end - start
      */
     public int getLength() {
-        return end - start;
+        return Math.abs(end - start);
     }
 
 }

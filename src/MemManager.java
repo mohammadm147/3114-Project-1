@@ -13,6 +13,7 @@ public class MemManager {
     private byte[] memArray;
     private DLList<Block> freeBlocks;
     private int byteSize = 2;
+    private MemManager mem;
 
     /*
      * MemManager contains Seminars that are serialized
@@ -50,13 +51,13 @@ public class MemManager {
      * Finds the index to insert
      * 
      * @param block
-     * @return
+     *            representing free block
+     * @return the index
      */
     public int findIndex(Block block) {
         int temp = 0;
         for (int i = 0; i < freeBlocks.size(); i++) {
-            if ((freeBlocks.get(i).getLength() <= block.getLength())
-                && (freeBlocks.get(i).getEnd() < block.getStart())) {
+            if (freeBlocks.get(i).getEnd() <= block.getStart()) {
                 temp = i + 1;
             }
         }
@@ -96,9 +97,10 @@ public class MemManager {
 
         int count = findFit(temp);
         while ((freeBlocks.get(count).getLength() / 2) >= temp) {
+            int half = freeBlocks.get(count).getLength() / 2;
             Block b1 = new Block(freeBlocks.get(count).getStart(), freeBlocks
-                .get(count).getEnd() - temp);
-            Block b2 = new Block(freeBlocks.get(count).getEnd() - temp,
+                .get(count).getEnd() - half);
+            Block b2 = new Block(freeBlocks.get(count).getEnd() - half,
                 freeBlocks.get(count).getEnd());
             freeBlocks.remove(freeBlocks.get(count));
             freeBlocks.add(count, b1);
@@ -118,6 +120,7 @@ public class MemManager {
         Handle handle = new Handle();
         handle.setStart(seminarStart);
         handle.setEnd(seminarStart + size);
+        merge(freeBlocks);
         return handle;
     }
 
@@ -128,6 +131,7 @@ public class MemManager {
      * 
      * @param size
      *            representing the size of the record
+     * @return the index of freeblock that fits best
      */
     private int findFit(int size) {
 
@@ -168,10 +172,10 @@ public class MemManager {
         // new block represnting increase in size
         freeBlocks.add(findIndex(block), block);
 
-        merge(freeBlocks);
-
         memArray = updatedArray;
         memPoolSize = newSize;
+
+        merge(freeBlocks);
 
         System.out.println("Memory pool expanded to " + memArray.length
             + " bytes");
@@ -182,25 +186,23 @@ public class MemManager {
     /**
      * Merge two freeblocks
      * 
-     * @param blocks
-     *            being free block list
+     * @param freeBlockList
+     *            for freeBlocks
      */
     public void merge(DLList<Block> freeBlockList) {
-        if (freeBlockList.size() > 0) {
-            for (int i = 0; i < freeBlockList.size() - 1; i++) {
-                int length = freeBlockList.get(i).getLength();
-                int length2 = freeBlockList.get(i + 1).getLength();
-                if ((freeBlockList.get(i).getStart() | length) == (freeBlockList
-                    .get(i + 1).getStart() | length2)) {
-                    int secondBlockEnd = freeBlockList.get(i + 1).getEnd();
-                    Block newBlock = new Block(freeBlockList.get(i).getStart(),
-                        secondBlockEnd);
-                    freeBlockList.remove(i + 1);
-                    freeBlockList.remove(i);
-                    freeBlockList.add(findIndex(newBlock), newBlock);
-                    merge(freeBlockList);
+        for (int i = 0; i < freeBlockList.size() - 1; i++) {
+            int length = freeBlockList.get(i).getLength();
+            int length2 = freeBlockList.get(i + 1).getLength();
+            if ((freeBlockList.get(i).getStart() | length) == (freeBlockList
+                .get(i + 1).getStart() | length2)) {
+                int secondBlockEnd = freeBlockList.get(i + 1).getEnd();
+                Block newBlock = new Block(freeBlockList.get(i).getStart(),
+                    secondBlockEnd);
+                freeBlockList.remove(i + 1);
+                freeBlockList.remove(i);
+                freeBlockList.add(findIndex(newBlock), newBlock);
+                merge(freeBlockList);
 
-                }
             }
         }
     }
@@ -210,7 +212,7 @@ public class MemManager {
      * Free a block at the position specified by theHandle.
      * Merge adjacent free blocks.
      * 
-     * @param theHandle
+     * @param handle
      *            representing handle
      */
     public void remove(Handle handle) {
@@ -226,10 +228,14 @@ public class MemManager {
             + temp);
         freeBlocks.add(findIndex(removedBlock), removedBlock);
         merge(freeBlocks);
-
     }
 
 
+    /**
+     * Get memory array
+     * 
+     * @return the memory array
+     */
     public byte[] getArr() {
         return memArray;
     }
@@ -237,37 +243,41 @@ public class MemManager {
 
     /**
      * Dump a printout of the freeblock list
+     * 
+     * @return the dumped out freeblock list
      */
     public String dump() {
-        System.out.println("Freeblock List:");
+        System.out.print("Freeblock List:");
         StringBuilder res = new StringBuilder();
         if (freeBlocks.size() == 0) {
-            res.append("There are no freeblocks in the memory pool");
+            res.append("\nThere are no freeblocks in the memory pool");
         }
         else {
-            int length = 0;
-            int count = 1;
-            for (int i = 0; i < freeBlocks.size(); i++) {
-                if (freeBlocks.get(i).getLength() == length) {
-                    res.append(" " + freeBlocks.get(i).getStart());
+            int smallestBlockLength = Integer.MAX_VALUE;
+            int biggestBlockLength = Integer.MIN_VALUE;
+            for (int j = 0; j < freeBlocks.size(); j++) {
+                if (freeBlocks.get(j).getLength() < smallestBlockLength) {
+                    smallestBlockLength = freeBlocks.get(j).getLength();
                 }
-                else {
-                    length = freeBlocks.get(i).getLength();
-                    if (count == 1) {
-                        res.append(length + ": " + freeBlocks.get(i)
-                            .getStart());
-                        count++;
-                    }
-                    else {
-                        res.append("\n" + length + ": " + freeBlocks.get(i)
-                            .getStart());
-                        count++;
-                    }
-
+                if (freeBlocks.get(j).getLength() > biggestBlockLength) {
+                    biggestBlockLength = freeBlocks.get(j).getLength();
                 }
-
             }
-
+            while (smallestBlockLength <= biggestBlockLength) {
+                int count = 1;
+                for (int i = 0; i < freeBlocks.size(); i++) {
+                    int length = freeBlocks.get(i).getLength();
+                    if ((count == 1) && (length == smallestBlockLength)) {
+                        res.append("\n" + smallestBlockLength + ":");
+                        count++;
+                    }
+                    if (length == smallestBlockLength) {
+                        res.append(" " + freeBlocks.get(i).getStart());
+                    }
+                    // count++;
+                }
+                smallestBlockLength = smallestBlockLength * 2;
+            }
         }
         return res.toString();
     }

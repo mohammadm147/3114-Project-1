@@ -173,6 +173,9 @@ public class HashTableTest extends TestCase {
         hashTable.delete(32);
     }
     
+    /**
+     * test tombstone
+     */
     public void testHashTableTobmstoneInsert() {
         Record record2 = new Record();
         for (int i = 0; i < 15; i++) {
@@ -188,6 +191,9 @@ public class HashTableTest extends TestCase {
         hashTable.insert(14, record2);
     }
     
+    /**
+     * test collision 
+     */
     public void testDeleteCollision()
     {
         Record record2 = new Record();

@@ -16,11 +16,6 @@ public class Handle {
 
     /**
      * Handle Constructor
-     * 
-     * @param start
-     *            is start of record
-     * @param end
-     *            is end of record
      */
     public Handle() {
     }

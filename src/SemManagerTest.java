@@ -35,9 +35,13 @@ public class SemManagerTest extends TestCase {
             SemManager.main(null);
         }
         catch (Exception e) {
+            Exception nullExc = new Exception("Arguments are null.");
+            assertEquals(e.toString(), nullExc.toString());
             thrown = true;
         }
         assertTrue(thrown);
+        
+        
     }
 
 
@@ -72,7 +76,10 @@ public class SemManagerTest extends TestCase {
 
     }
 
-
+    /**
+     * Test Power of Two Exception
+     * @throws Exception
+     */
     public void testPowerOfTwoException() throws Exception {
         String[] args = new String[] {"3", "2", "testname"};
         boolean thrown = false;

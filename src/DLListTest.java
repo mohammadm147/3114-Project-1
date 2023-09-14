@@ -80,6 +80,7 @@ public class DLListTest extends TestCase {
      * are placed correctly
      */
     public void testAddIndex() {
+
         list.add("B");
         list.add(0, "A");
         assertEquals("A", list.get(0));
@@ -172,13 +173,11 @@ public class DLListTest extends TestCase {
         assertEquals(1, list.size());
         list.add("D");
         assertEquals(2, list.size());
-        
+
         list.remove("D");
         assertEquals(1, list.size());
-        
-        
+
     }
-    
 
 
     /**
@@ -207,37 +206,6 @@ public class DLListTest extends TestCase {
 
 
     /**
-     * Test contains when it does and does not contain the object
-     */
-    public void testContains() {
-        assertFalse(list.contains("A"));
-        list.add("A");
-        assertTrue(list.contains("A"));
-        assertFalse(list.contains("B"));
-        list.add("B");
-        assertTrue(list.contains("B"));
-    }
-
-
-    /**
-     * Test lastIndexOf when the list is empty, when the object is not in the
-     * list, and when it is at the beginning or end
-     */
-    public void testLastIndexOf() {
-        assertEquals(-1, list.lastIndex("A"));
-        list.add("A");
-        assertEquals(0, list.lastIndex("A"));
-        list.add("A");
-        assertEquals(1, list.lastIndex("A"));
-        list.add("B");
-        assertEquals(1, list.lastIndex("A"));
-        assertEquals(2, list.lastIndex("B"));
-        list.add("A");
-        assertEquals(3, list.lastIndex("A"));
-    }
-
-
-    /**
      * Tests isEmpty when empty and full
      */
     public void testIsEmpty() {
@@ -254,6 +222,5 @@ public class DLListTest extends TestCase {
         list.add("A");
         list.clear();
         assertEquals(0, list.size());
-        assertFalse(list.contains("A"));
     }
 }

@@ -43,15 +43,15 @@ public class Record {
     public int getId() {
         return id;
     }
-    
+
+
     /**
      * Sets the record's id
      * 
-     * @return
-     *          seminar
+     * @return han representing handle
+     * 
      */
-    public Handle getHan()
-    {
+    public Handle getHan() {
         return han;
     }
 
@@ -76,15 +76,15 @@ public class Record {
     public void setId(int id1) {
         id = id1;
     }
-    
+
+
     /**
      * Sets the record's seminar
      * 
-     * @param tempSem
+     * @param tempHan
      *            inputed seminar
      */
-    public void setHan(Handle tempHan)
-    {
+    public void setHan(Handle tempHan) {
         han = tempHan;
     }
 }

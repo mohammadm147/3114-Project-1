@@ -7,6 +7,10 @@ import student.TestCase;
 
 /**
  * Test class for Block
+ * 
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 2023-09-13
  */
 public class BlockTest extends TestCase {
 
